@@ -1,0 +1,12 @@
+{
+    "require": {
+        "monolog/monolog": "1.0.*"
+    },
+   
+    "config": {
+
+        "platform-check": false
+    }
+}
+
+
