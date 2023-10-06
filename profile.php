@@ -33,6 +33,7 @@ $following_count = $stmt_following->fetchColumn();
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title><?php echo $user['username']; ?>'s Profile</title>
+     <link rel="icon" href="assets/images/1200px-Instagram.svg.png" type="image/png">
      <link rel="stylesheet" href="CSS/profile_style.css">
      <link rel="stylesheet" href="CSS/test.css">
      <link rel="stylesheet" href="CSS/footer.css">
@@ -177,7 +178,29 @@ $stmt->execute([$user_id]);
 
     <div class="options-container" >
     <div class="post-caption">
-    <?php echo $user['username']; ?>: <?php echo $image['caption']; ?>
+    <?php echo $user['username']; ?>: <?php if($image['is_hashtag']==1)
+                                        {
+                                            $words = explode(' ', $image['caption']);
+    
+    
+    foreach($words as $word) {
+        
+        if (substr($word, 0, 1) == '#') {
+            
+            $hashtag = substr($word, 1);
+            
+            
+            echo '<a href="hashtag.php?hashtag=' . $hashtag . '">' . $word . '</a> ';
+        } else {
+           
+            echo $word . ' ';
+        }
+    }
+                                          
+                                        }
+                                        else{  
+                                           
+                                        echo $image['caption'];} ?>
 </div>
     <div class="comment-section">
     <?php $post_id = $image['id_p'];

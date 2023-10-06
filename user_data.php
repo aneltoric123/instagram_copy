@@ -19,7 +19,8 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="CSS/user_data.css">
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <title>Document</title>
+    <title><?php echo $user['username']; ?>'s Data</title>
+    <link rel="icon" href="assets/images/1200px-Instagram.svg.png" type="image/png">
     <link rel="stylesheet" href="CSS/test.css">
     <link rel="stylesheet" href="CSS/header.css">
     <title>Document</title>
@@ -70,7 +71,11 @@ if ($_SESSION['admin']==1) {
                                 </a>
                             </li>
                             
-
+                            <li class="list-inline-item ">
+                                <a href="message.php" class="link-menu" data-toggle="tooltip" data-placement="bottom" title="Messages">
+                                    <img src="assets/images/message-svgrepo-com.svg" alt="slika-5" class="profile-size">
+                                </a>
+                            </li>
                            
                             <li class="list-inline-item">
                                 <a href="profile.php" class="link-menu" data-toggle="tooltip" data-placement="bottom" title="Profile">

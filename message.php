@@ -12,7 +12,8 @@ $sender=$_SESSION['user_id'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <title>Document</title>
+    <title>Messages</title>
+    <link rel="icon" href="assets/images/1200px-Instagram.svg.png" type="image/png">
     <link rel="stylesheet" href="CSS/test.css">
     <link rel="stylesheet" href="CSS/message.css">
     <link rel="stylesheet" href="css/header.css">
@@ -64,7 +65,11 @@ if ($_SESSION['admin']==1) {
                                     </svg>
                                 </a>
                             </li>
-                            
+                             <li class="list-inline-item ">
+                                <a href="message.php" class="link-menu" data-toggle="tooltip" data-placement="bottom" title="Messages">
+                                    <img src="assets/images/message-svgrepo-com.svg" alt="slika-5" class="profile-size">
+                                </a>
+                            </li>
                           
                            
                             <li class="list-inline-item">
@@ -119,8 +124,12 @@ $followed_users_query->execute([$sender]);
             </div>
         <?php endforeach; ?>
         </div>
-        <div class="chatroom">
         <?php    
+        if(empty($receiver)){
+           
+        }else{ ?>
+        <div class="chatroom">
+        <?php 
         echo '<h2 class="chatroom-heading">Messaging with  '.$receiver.'</h2>';
         
     echo ' <div class="messages">';
@@ -163,6 +172,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         <input type="submit" name="poslji_sporocilo" value="Send">
                       </form>
     </div>
+    <?php } ?>
 </body>
 <footer>    
     

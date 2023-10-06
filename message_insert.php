@@ -12,7 +12,8 @@ $stmt2->execute([$receiver]);
 $receiver_id=$stmt2->fetchColumn();
 
 $content=$_POST['message'];
-$date=date('Y-m-d H:i:s');
+$date=date('d/m/Y H:i:s');
+
 $insert="INSERT into messages(content,date_sent,sender_id,receiver_id) VALUES(?,?,?,?)";
 $stmt=$pdo->prepare($insert);
 $stmt->execute([$content,$date,$sender,$receiver_id]);

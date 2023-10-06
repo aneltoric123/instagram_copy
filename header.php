@@ -10,7 +10,7 @@ include_once 'session.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <title>Document</title>
+    <link rel="icon" href="assets/images/1200px-Instagram.svg.png" type="image/png">
     <link rel="stylesheet" href="css/test.css">
     <link rel="stylesheet" href="css/header.css">
 </head>
@@ -91,7 +91,11 @@ if ($_SESSION['admin']==1) {
 </a>
 
                             </li>
-                           
+                            <li class="list-inline-item ">
+                                <a href="message.php" class="link-menu" data-toggle="tooltip" data-placement="bottom" title="Messages">
+                                    <img src="assets/images/message-svgrepo-com.svg" alt="slika-5" class="profile-size">
+                                </a>
+                            </li>
                             <li class="list-inline-item">
                                 <a href="profile.php" class="link-menu" data-toggle="tooltip" data-placement="bottom" title="Profile">
                                     <img src="assets/images/profile-svgrepo-com.svg" alt="slika-3" class="profile-size">

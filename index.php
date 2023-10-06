@@ -40,6 +40,7 @@ if (isset($_GET['code'])) {
 <html>
 <head>
 	<title>Login Page</title>
+	<link rel="icon" href="assets/images/1200px-Instagram.svg.png" type="image/png">
    <!--Made with love by Mutiullah Samim -->
    
 	<!--Bootsrap 4 CDN-->

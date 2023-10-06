@@ -10,7 +10,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home</title>
+    <link rel="icon" href="assets/images/1200px-Instagram.svg.png" type="image/png">
     <link rel="stylesheet" href="CSS/homepage2.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -75,6 +76,11 @@
     <img src="assets/images/172525_plus_icon.svg" alt="slika-2" class="profile-size">
 </a>
 
+                            </li>
+                            <li class="list-inline-item ">
+                                <a href="message.php" class="link-menu" data-toggle="tooltip" data-placement="bottom" title="Messages">
+                                    <img src="assets/images/message-svgrepo-com.svg" alt="slika-5" class="profile-size">
+                                </a>
                             </li>
                            
                             <li class="list-inline-item ">
@@ -161,18 +167,14 @@
             <div class="hashtag-content">
                 <?php
                 
-            $hashtag_query="SELECT caption FROM posts WHERE is_hashtag=? ORDER BY RAND() LIMIT 5";
+            $hashtag_query="SELECT caption FROM posts WHERE is_hashtag=? ORDER BY RAND() LIMIT 8";
                     $hashtag_stmt=$pdo->prepare($hashtag_query);
                     $hashtag_stmt->execute([1]);
                     $hashtags=$hashtag_stmt->fetchAll(PDO::FETCH_COLUMN);
                     $processed_hashtags = [];
+                    
                 foreach($hashtags as $hashtag) {
-                    
-                    
-                    
                     $words = explode(' ', $hashtag);
-    
-                    
                     foreach($words as $word) {
                        
                         if (substr($word, 0, 1) == '#') {
@@ -180,9 +182,10 @@
                             $hashtag = substr($word, 1);
                             
                            if (!in_array($hashtag, $processed_hashtags)) {
-                $processed_hashtags[] = $hashtag; // Add to processed hashtags
+                $processed_hashtags[] = $hashtag; 
                 echo '<a href="hashtag.php?hashtag=' . $hashtag . '">' . $word . '</a> ';
             }
+            
                          
                         } else {
                             
