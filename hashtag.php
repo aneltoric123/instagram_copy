@@ -126,9 +126,22 @@ $admin=$_SESSION['admin'];
                     $hashtag_stmt=$pdo->prepare($hashtag_query);
                     $hashtag_stmt->execute([1]);
                     $hashtags=$hashtag_stmt->fetchAll(PDO::FETCH_COLUMN);
+                    $processed_hashtags = [];
                 foreach($hashtags as $hashtag) {
-                    $hashtag3=str_replace('#', '', $hashtag);
-                        echo '<a href="hashtag.php?hashtag=' . $hashtag3 . '">' . $hashtag . '</a> ';
+    
+                   $words = explode(' ', $hashtag);
+    foreach ($words as $word) {
+        if (substr($word, 0, 1) == '#') {
+            $hashtag = substr($word, 1);
+            if (!in_array($hashtag, $processed_hashtags)) {
+                $processed_hashtags[] = $hashtag; 
+                echo '<a href="hashtag.php?hashtag=' . $hashtag . '">' . $word . '</a> ';
+            }
+        } else {
+                           
+                           continue;
+                        }
+                    }
                     }
                 ?>
             </div>
@@ -137,14 +150,15 @@ $admin=$_SESSION['admin'];
            </div>
 </div>
  <?php
-    $hashtag_query="SELECT * FROM posts WHERE caption=? ORDER BY id_p DESC";
+    $hashtag_query="SELECT * FROM posts WHERE caption LIKE ? ORDER BY id_p DESC";
                         $stmt=$pdo->prepare($hashtag_query);
-                        $stmt->execute([$hashtag2]);
+                        $stmt->execute(["%$hashtag2%"]);
+                        
     $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-    $hashtag_count="SELECT COUNT(*) FROM posts WHERE caption=?";
+    $hashtag_count="SELECT COUNT(*) FROM posts WHERE caption LIKE ?";
     $stmt2=$pdo->prepare($hashtag_count);
-    $stmt2->execute([$hashtag2]);
+    $stmt2->execute(["%$hashtag2%"]);
     $posts_count=$stmt2->fetchColumn();
  
  ?>
@@ -247,8 +261,22 @@ echo '</div>';
                                         <strong class="d-block"><?php echo $user['username']; ?></strong>
                                         <p class="d-block mb-1"><?php  if($post['is_hashtag']==1)
                                         {
-                                            $post2['caption'] = str_replace('#', '', $post['caption']);
-                                       echo '<a href="hashtag.php?hashtag=' . $post2['caption'] . '">' . $post['caption'] . '</a>';
+                                                                                  $words = explode(' ', $post['caption']);
+    
+    
+    foreach($words as $word) {
+        
+        if (substr($word, 0, 1) == '#') {
+            
+            $hashtag = substr($word, 1);
+            
+            
+            echo '<a href="hashtag.php?hashtag=' . $hashtag . '">' . $word . '</a> ';
+        } else {
+           
+            echo $word . ' ';
+        }
+    }
                                           
                                         }
                                         else{  

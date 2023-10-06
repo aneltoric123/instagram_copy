@@ -160,13 +160,35 @@
         <div class="hashtags-container">
             <div class="hashtag-content">
                 <?php
+                
             $hashtag_query="SELECT caption FROM posts WHERE is_hashtag=? ORDER BY RAND() LIMIT 5";
                     $hashtag_stmt=$pdo->prepare($hashtag_query);
                     $hashtag_stmt->execute([1]);
                     $hashtags=$hashtag_stmt->fetchAll(PDO::FETCH_COLUMN);
+                    $processed_hashtags = [];
                 foreach($hashtags as $hashtag) {
-                    $hashtag2=str_replace('#', '', $hashtag);
-                        echo '<a href="hashtag.php?hashtag=' . $hashtag2 . '">' . $hashtag . '</a> ';
+                    
+                    
+                    
+                    $words = explode(' ', $hashtag);
+    
+                    
+                    foreach($words as $word) {
+                       
+                        if (substr($word, 0, 1) == '#') {
+                            
+                            $hashtag = substr($word, 1);
+                            
+                           if (!in_array($hashtag, $processed_hashtags)) {
+                $processed_hashtags[] = $hashtag; // Add to processed hashtags
+                echo '<a href="hashtag.php?hashtag=' . $hashtag . '">' . $word . '</a> ';
+            }
+                         
+                        } else {
+                            
+                            continue;
+                        }
+                    }
                     }
                 ?>
             </div>
@@ -271,8 +293,22 @@ echo '</div>';
 
                                         <p class="d-block mb-1"><?php    if($post['is_hashtag']==1)
                                         {
-                                            $post2['caption'] = str_replace('#', '', $post['caption']);
-                                       echo '<a href="hashtag.php?hashtag=' . $post2['caption'] . '">' . $post['caption'] . '</a>';
+                                            $words = explode(' ', $post['caption']);
+    
+    
+    foreach($words as $word) {
+        
+        if (substr($word, 0, 1) == '#') {
+            
+            $hashtag = substr($word, 1);
+            
+            
+            echo '<a href="hashtag.php?hashtag=' . $hashtag . '">' . $word . '</a> ';
+        } else {
+           
+            echo $word . ' ';
+        }
+    }
                                           
                                         }
                                         else{  
