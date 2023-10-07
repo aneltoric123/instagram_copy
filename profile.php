@@ -202,6 +202,27 @@ $stmt->execute([$user_id]);
                                            
                                         echo $image['caption'];} ?>
 </div>
+        <div class="caption">
+<?php
+$session_id=$_SESSION['user_id'];
+
+if($image['user_id']==$session_id){
+ echo '<form action="post_update.php" method="post">
+ <input type="text" name="caption" placeholder="Update caption" required>
+ <input type="hidden" name="post_id" value="'.$image["id_p"].'">
+ <input type="submit" value="Update">
+ </form>';
+ echo '<form method="post" action="post_delete.php">
+ <input type="hidden" name="post_id" value="'.$image["id_p"].'">
+ <input type="submit" name="delete" value="Delete">
+ </form>';
+}
+
+
+?>
+
+
+        </div>
     <div class="comment-section">
     <?php $post_id = $image['id_p'];
     
@@ -254,27 +275,7 @@ echo "Comments:";
                 }
             ?>
         </div>
-        <div class="caption">
-<?php
-$session_id=$_SESSION['user_id'];
 
-if($image['user_id']==$session_id){
- echo '<form action="post_update.php" method="post">
- <input type="text" name="caption" placeholder="Update caption" required>
- <input type="hidden" name="post_id" value="'.$image["id_p"].'">
- <input type="submit" value="Update">
- </form>';
- echo '<form method="post" action="post_delete.php">
- <input type="hidden" name="post_id" value="'.$image["id_p"].'">
- <input type="submit" name="delete" value="Delete">
- </form>';
-}
-
-
-?>
-
-
-        </div>
         </div>
         </div>
     </div
