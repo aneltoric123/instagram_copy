@@ -3,7 +3,7 @@ include_once 'session.php';
 include_once 'database.php';
 
 $sender=$_SESSION['user_id'];
-$receiver=$_POST['receiver'];
+$receiver=filter_input(INPUT_POST,'receiver',FILTER_SANITIZE_STRING);
 
 
 $receiver_id_query="SELECT id_u FROM users WHERE username=?";

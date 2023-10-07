@@ -3,7 +3,7 @@
 include_once 'database.php';
 include_once 'session.php';
 
-$following_id=$_POST['following_id'];
+$following_id = filter_input(INPUT_POST, 'following_id', FILTER_VALIDATE_INT);
 $user_id=$_SESSION['user_id'];
 
 

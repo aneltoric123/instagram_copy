@@ -3,7 +3,7 @@ include_once 'database.php';
 include_once 'session.php';
 
 
-$comment_id=$_POST['comment_id'];
+$comment_id = filter_input(INPUT_POST, 'comment_id', FILTER_VALIDATE_INT);
 
 $delete_query="DELETE FROM comments WHERE id_c=?";
 $stmt=$pdo->prepare($delete_query);

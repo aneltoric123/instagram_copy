@@ -2,8 +2,8 @@
 include 'session.php';
 include_once 'database.php';
 
-$photo_id = $_POST['post_id'];
-$user_id = $_POST['user_id'];
+$photo_id = filter_input(INPUT_POST, 'post_id', FILTER_VALIDATE_INT);
+$user_id = filter_input(INPUT_POST, 'user_id', FILTER_VALIDATE_INT);
 
 $get_like_count = $pdo->prepare("SELECT like_number FROM likes WHERE post_id = ?");
 $get_like_count->execute([$photo_id]);

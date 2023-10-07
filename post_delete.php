@@ -3,9 +3,9 @@
 include 'database.php';
 include 'session.php';
 
-$post_id=$_POST['post_id'];
 
-echo $post_id;
+$post_id=filter_input(INPUT_POST,'post_id',FILTER_VALIDATE_INT);
+
 $referring_page = $_SERVER['HTTP_REFERER'];
 
 

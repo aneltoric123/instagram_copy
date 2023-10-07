@@ -3,8 +3,8 @@ include_once 'database.php';
 include_once 'session.php';
 
 
-$post_caption=$_POST['caption'];
 
+$post_caption=filter_input(INPUT_POST,'caption',FILTER_SANITIZE_STRING);
 preg_match_all("/#\w+/", $post_caption, $matches);
 $hashtags = $matches[0];
 

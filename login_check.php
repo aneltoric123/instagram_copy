@@ -16,9 +16,9 @@ $client->addScope("profile");
 
 // Check if the user is attempting a regular login
 if (isset($_POST['email']) && isset($_POST['password'])) {
-    $email = $_POST['email'];
+     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
     $pass = $_POST['password'];
-    echo $email,$pass;
+  
     
     $query = "SELECT * FROM users WHERE email=?";
     $stmt = $pdo->prepare($query);

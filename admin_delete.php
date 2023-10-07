@@ -2,7 +2,8 @@
 include 'session.php';
 
 include 'database.php';
-$user_id=$_POST['user_id'];
+$user_id = filter_input(INPUT_POST, 'user_id', FILTER_VALIDATE_INT);
+
 $delete_query3="DELETE FROM comments WHERE user_id=?";
 $stmt3=$pdo->prepare($delete_query3);
 $stmt3->execute([$user_id]);
